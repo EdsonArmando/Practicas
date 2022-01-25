@@ -1,14 +1,15 @@
-const express = require("express");
+const { Router } = require('express');
 const jwt = require("jsonwebtoken");
+const router = Router();
 
-const app = express();
 
-app.get("/api", (req, res)=>{
+
+router.get("/api", async(req, res)=>{
 	res.json({
 		mensaje: "Funciona la app"
 	});
 });
-app.post("/api/login", (req, res)=>{
+router.post("/api/tokenUsuario", async(req, res)=>{
 	const usuario = {
 		id: 1,
 		nombre: "Edson",
@@ -22,7 +23,7 @@ app.post("/api/login", (req, res)=>{
 	});
 });
 //Perimitiremos al usuario acceder a la ruta siempre que tenga el token
-app.post("/api/posts", VerificarToken, (req, res)=>{	
+router.post("/api/Login", VerificarToken, async(req, res)=>{	
 	//Verificar Token
 	jwt.verify(req.token, 'llave', (error, authData)=>{
 		if(error){
@@ -37,9 +38,6 @@ app.post("/api/posts", VerificarToken, (req, res)=>{
 	});
 });
 
-app.listen(3000,function(){
-	console.log("server practica 1 SA");
-});
 // Authorization: Bearer <token>
 function VerificarToken(req, res, next){	
 	console.log("Se usa esta funcion");
@@ -52,3 +50,4 @@ function VerificarToken(req, res, next){
 		res.sendStatus(403);
 	}
 }
+module.exports = router;
