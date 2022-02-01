@@ -1,19 +1,16 @@
 const express = require("express");
 const app = express();
-const cors = require('cors');
-const bp = require('body-parser')
-
-app.use(bp.json())
-app.use(bp.urlencoded({ extended: false }))
+var bodyParser = require('body-parser')
 
 //Routes
 app.use(require('./Login.js'));
-app.use(require('../Cliente/Cliente.js'));
 
-app.use(cors());
-app.use(express.json({ limit: '100mb' }))
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.listen(3000,function(){
+// parse application/json
+app.use(bodyParser.json())
+app.listen(3001,function(){
 	console.log("server practica 1 SA");
 });
 
