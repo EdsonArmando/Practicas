@@ -1,7 +1,18 @@
 const { Router } = require('express');
 const jwt = require("jsonwebtoken");
 const router = Router();
-
+//Array Tipo
+/*
+0-------->Cliente
+1-------->Restaurante
+2-------->Repartidor
+*/
+//Array usuarios registrados en el sistema
+const usuarios={"users":[
+            {"id":1, "nombre":"Edson", "email":"edosn@gmail.com","rol":1, "pass" : "123"},            
+            {"id":2, "nombre":"Armando", "email":"arma@gmail.com","rol":0, "pass" : "123"},
+            {"id":3, "nombre":"luciana", "email":"lu@gmail.com","rol":2, "pass" : "123"},
+            ]};
 
 
 router.get("/api", async(req, res)=>{
@@ -9,21 +20,55 @@ router.get("/api", async(req, res)=>{
 		mensaje: "Funciona la app"
 	});
 });
-router.post("/api/tokenUsuario", async(req, res)=>{
+router.post("/api/Login", async(req, res)=>{
+	let bandera = false;
+	let tipoUsuario = "";
 	const usuario = {
-		id: 1,
-		nombre: "Edson",
-		email: "edosn@gmail.com"
+		id: req.body.id,
+		nombre: req.body.nombre,
+		email: req.body.email,
+		rol: req.body.rol,
+		pass: req.body.pass
 	}
-	//Uso de jwt
-	jwt.sign({usuario},'llave',(err, token)=>{
-		res.json({
-			token: token
+	//Validar que usuario este en la base de datos
+	for(let i = 0 ; i<usuarios.users.length; i++){
+		if(usuarios.users[i].email === req.body.email && usuarios.users[i].pass === req.body.pass){
+			bandera = true;
+			usuario.id = usuarios.users[i].id;
+			usuario.nombre = usuarios.users[i].nombre;
+			usuario.email = usuarios.users[i].email;
+			usuario.rol = usuarios.users[i].rol;
+			usuario.pass = usuarios.users[i].pass;
+
+			if(usuario.rol == 0){
+				tipoUsuario = "Cliente";
+				console
+			}else if(usuario.rol == 1){
+				tipoUsuario = "Restaurante";
+			}else if(usuario.rol == 2){
+				tipoUsuario = "Repartidor";
+			}
+		}
+	}
+	//si se encontro el usuario
+	if(bandera){
+		//Uso de jwt
+		jwt.sign({usuario},'llave',(err, token)=>{
+			expiresIn: 1440
+			res.json({
+				mensaje: "bienvenido usuario tipo: " + tipoUsuario,
+				token: token
+			});
 		});
-	});
+	}else{
+		res.json({
+			mensaje: "No se encontro el usuario",
+			code: 403
+		});
+	}	
 });
 //Perimitiremos al usuario acceder a la ruta siempre que tenga el token
-router.post("/api/Login", VerificarToken, async(req, res)=>{	
+router.post("/api/testToken", VerificarToken, async(req, res)=>{	
 	//Verificar Token
 	jwt.verify(req.token, 'llave', (error, authData)=>{
 		if(error){
@@ -40,7 +85,6 @@ router.post("/api/Login", VerificarToken, async(req, res)=>{
 
 // Authorization: Bearer <token>
 function VerificarToken(req, res, next){	
-	console.log("Se usa esta funcion");
 	const beareheader = req.headers['authorization'];
 	if(typeof beareheader !== 'undefined'){
 		const token = beareheader.split(" ")[1];
