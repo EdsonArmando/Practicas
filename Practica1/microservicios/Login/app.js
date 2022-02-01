@@ -1,17 +1,19 @@
 const express = require("express");
 const app = express();
-var bodyParser = require('body-parser')
+const cors = require('cors');
+const bp = require('body-parser')
+
+app.use(bp.json())
+app.use(bp.urlencoded({ extended: false }))
 
 //Routes
 app.use(require('./Login.js'));
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors());
+app.use(express.json({ limit: '100mb' }))
 
-// parse application/json
-app.use(bodyParser.json())
-app.listen(3001,function(){
-	console.log("server practica 1 SA");
+app.listen(3000,function(){
+	console.log("server practica 1 SA en puerto 3000");
 });
 
 module.exports = app;
