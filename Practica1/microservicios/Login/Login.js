@@ -53,7 +53,32 @@ router.post("/api/Login", async(req, res)=>{
 	//si se encontro el usuario
 	if(bandera){
 		//Uso de jwt
-		jwt.sign({usuario},'llave',(err, token)=>{
+		if (usuario.rol==0){
+			jwt.sign({usuario},'llaveCliente',(err, token)=>{
+				expiresIn: 1440
+				res.json({
+					mensaje: "bienvenido usuario tipo: " + tipoUsuario,
+					token: token
+				});
+			});
+		}else  if (usuario.rol==1){
+			jwt.sign({usuario},'llaveRestaurante',(err, token)=>{
+				expiresIn: 1440
+				res.json({
+					mensaje: "bienvenido usuario tipo: " + tipoUsuario,
+					token: token
+				});
+			});
+		}else if (usuario.rol==2){
+			jwt.sign({usuario},'llaveRepartidor',(err, token)=>{
+				expiresIn: 1440
+				res.json({
+					mensaje: "bienvenido usuario tipo: " + tipoUsuario,
+					token: token
+				});
+			});
+		}
+		jwt.sign({usuario},'llaves',(err, token)=>{
 			expiresIn: 1440
 			res.json({
 				mensaje: "bienvenido usuario tipo: " + tipoUsuario,

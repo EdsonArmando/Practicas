@@ -11,7 +11,7 @@ router.get("/apiCliente", async(req, res)=>{
 //Perimitiremos al usuario acceder a la ruta siempre que tenga el token
 router.post("/api/testCliente", VerificarToken, async(req, res)=>{	
 	//Verificar Token
-	jwt.verify(req.token, 'llave', (error, authData)=>{
+	jwt.verify(req.token, 'llaveCliente', (error, authData)=>{
 		if(error){
 			console.log("Token Incorrecto");
 			res.sendStatus(403);
