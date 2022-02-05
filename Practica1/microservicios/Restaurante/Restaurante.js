@@ -16,6 +16,7 @@ router.post("/api/RecibirPedido", VerificarToken, async(req, res)=>{
 			console.log("Token Incorrecto");
 			res.sendStatus(403);
 		}else{	
+			console.log("Token Correcto, Bienvenido al servicio de Restaurante- pedido 3 -resivido")
 			res.json({
 				mensaje: "Token Correcto, Bienvenido al servicio de Restaurante",
 				idPedido: 3,
@@ -31,6 +32,8 @@ router.post("/api/InformarEstado", VerificarToken, async(req, res)=>{
 			console.log("Token Incorrecto");
 			res.sendStatus(403);
 		}else{	
+			console.log("Token Correcto, Bienvenido al servicio de Restaurante- pedido 3 - en proceso")
+
 			res.json({
 				idPedido: 3,
 				estadoPedido: "en proceso",
@@ -45,6 +48,8 @@ router.post("/api/AvisarRepartido", VerificarToken, async(req, res)=>{
 			console.log("Token Incorrecto");
 			res.sendStatus(403);
 		}else{	
+			console.log("Token Correcto, Bienvenido al servicio de Restaurante- pedido 3 -Listo para entrega")
+
 			res.json({
 				mensaje: "Token Correcto, Bienvenido al servicio de Restaurante",
 				idPedido: 3,
