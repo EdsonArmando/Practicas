@@ -65,7 +65,7 @@ router.post("/api/Login", async(req, res)=>{
 			jwt.sign({usuario},'llaveRestaurante',(err, token)=>{
 				expiresIn: 1440
 				res.json({
-					mensaje: "bienvenido usuario tipo: " + tipoUsuario,
+					mensaje: "bienvenido :) usuario tipo: " + tipoUsuario,
 					token: token
 				});
 			});
