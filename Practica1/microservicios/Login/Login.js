@@ -60,6 +60,8 @@ router.post("/api/Login", async(req, res)=>{
 					mensaje: "bienvenido usuario tipo: " + tipoUsuario,
 					token: token
 				});
+				console.log("UsuarioCorrecto");
+				console.log("Token" + token);
 			});
 		}else  if (usuario.rol==1){
 			jwt.sign({usuario},'llaveRestaurante',(err, token)=>{
@@ -68,6 +70,8 @@ router.post("/api/Login", async(req, res)=>{
 					mensaje: "bienvenido :) usuario tipo: " + tipoUsuario,
 					token: token
 				});
+				console.log("UsuarioCorrecto");
+				console.log("Token" + token);
 			});
 		}else if (usuario.rol==2){
 			jwt.sign({usuario},'llaveRepartidor',(err, token)=>{
@@ -79,17 +83,20 @@ router.post("/api/Login", async(req, res)=>{
 			});
 		}
 		jwt.sign({usuario},'llaves',(err, token)=>{
-			expiresIn: 1440
+			expiresIn: 1440			
 			res.json({
 				mensaje: "bienvenido usuario tipo: " + tipoUsuario,
 				token: token
-			});
+			});		
+			console.log("UsuarioCorrecto");
+			console.log("Token" + token);
 		});
 	}else{
 		res.json({
 			mensaje: "No se encontro el usuario",
 			code: 403
 		});
+		console.log("Usuario Inorrecto");	
 	}	
 });
 //Perimitiremos al usuario acceder a la ruta siempre que tenga el token

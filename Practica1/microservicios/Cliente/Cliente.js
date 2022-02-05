@@ -22,6 +22,7 @@ router.post("/api/testCliente", VerificarToken, async(req, res)=>{
 				estadoPedidoRestaurante: "En proceso",
 				estadoPedidoRepartidor: "Entregando"			
 			});
+			console.log("Token correcto");
 		}
 	});
 });
@@ -35,6 +36,7 @@ function VerificarToken(req, res, next){
 		next();
 	}else{		
 		res.sendStatus(403);
+		console.log("Token Incorrecto");
 	}
 }
 module.exports = router;
