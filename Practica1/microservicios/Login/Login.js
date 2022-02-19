@@ -78,13 +78,7 @@ router.post("/api/Login", async(req, res)=>{
 				});
 			});
 		}
-		jwt.sign({usuario},'llaves',(err, token)=>{
-			expiresIn: 1440
-			res.json({
-				mensaje: "bienvenido usuario tipo: " + tipoUsuario,
-				token: token
-			});
-		});
+		
 	}else{
 		res.json({
 			mensaje: "No se encontro el usuario",
