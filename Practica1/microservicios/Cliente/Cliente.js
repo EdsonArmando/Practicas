@@ -17,11 +17,12 @@ router.post("/api/testCliente", VerificarToken, async(req, res)=>{
 			res.sendStatus(403);
 		}else{	
 			res.json({
-				mensaje: "Token Correcto, Bienvenido al servicio de cliente",
+				mensaje: "Token Correcto :), Bienvenido al servicio de cliente",
 				idPedido: 3,
 				estadoPedidoRestaurante: "En proceso",
 				estadoPedidoRepartidor: "Entregando"			
 			});
+			console.log("Token correcto");
 		}
 	});
 });
@@ -35,6 +36,7 @@ function VerificarToken(req, res, next){
 		next();
 	}else{		
 		res.sendStatus(403);
+		console.log("Token Incorrecto");
 	}
 }
 module.exports = router;
