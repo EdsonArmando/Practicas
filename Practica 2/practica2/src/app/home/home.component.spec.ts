@@ -22,4 +22,12 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('varaibles sea correcta ', () => {
+    expect(component.test).toEqual("esto es una prueba");
+  });
+  it('Debe calcularse', () => {
+    let result=component.calcular(1,2)
+    let expex=(1+2)*45
+    expect(result).toEqual(expex);
+  });
 });

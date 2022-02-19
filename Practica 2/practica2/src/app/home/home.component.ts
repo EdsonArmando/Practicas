@@ -11,5 +11,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  test="esto es una prueba"
+  calcular(numero:any,numero2:any ){
+  return (numero+numero2)*45
+  }
 
 }
