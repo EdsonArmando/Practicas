@@ -3,10 +3,7 @@
     hosts: webservers
     become: yes
     become_user: root
-    vars:
-      ansible_python_interpreter: /usr/bin/python3
     tasks:
-      - debug: var=ansible_host
       - name: ensure apache is at the latest version
         yum:
           name: httpd
