@@ -1,0 +1,21 @@
+
+echo stage test
+cd 'Practica 2/practica2' 
+npm i
+export CHROME_BIN=/usr/bin/chromium-browse.
+npm ng test 
+
+echo stage build 
+cd 'Practica 2/practica2' 
+stop front
+docker rm front
+
+docker build -t "jhonnagar/front:latest" ./
+docker push "jhonnagar/front:latest"
+
+echo stage deploy 
+cd 'Practica 2/practica2' 
+docker pull "jhonnagar/front:latest" #descargamos la imagen a nuestro Docker
+docker run -d -p 80:4200 --name=front jhonnagar/front:latest
+
+
