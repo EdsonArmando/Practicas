@@ -1,6 +1,6 @@
-projectKey=test
+projectKey=practica6
 serverUrl=http://localhost:9000
 serverVersion=9.3.0.51899
-dashboardUrl=http://localhost:9000/dashboard?id=test
-ceTaskId=AX8tAmmyl2BZZaEt_6k8
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AX8tAmmyl2BZZaEt_6k8
+dashboardUrl=http://localhost:9000/dashboard?id=practica6
+ceTaskId=AX9d1PtyvWVW_7mx6DTS
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AX9d1PtyvWVW_7mx6DTS
